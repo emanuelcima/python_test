@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from kilimo.models import Field, Rain
+from api.models import Field, Rain
 
 
 class RainSerializer(serializers.ModelSerializer):

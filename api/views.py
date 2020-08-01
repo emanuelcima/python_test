@@ -1,14 +1,13 @@
 from datetime import date, timedelta
 from decimal import Decimal
 
-from django.db.models import Avg, Sum, Q
+from django.db.models import Sum, Q
 from django.db.models.functions import Coalesce 
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets, mixins
 
-from kilimo.models import Field, Rain
-from kilimo.serializers import RainSerializer, FieldSerializer
+from api.models import Field, Rain
+from api.serializers import RainSerializer, FieldSerializer
 
 
 class RainViewSet(mixins.CreateModelMixin,
