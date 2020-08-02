@@ -1,9 +1,12 @@
 from rest_framework import serializers
+
 from api.models import Field, Rain
 
 
 class RainSerializer(serializers.ModelSerializer):
-    """Rain Serializer"""
+    """
+    Rain Serializer
+    """
 
     class Meta:
         model = Rain
@@ -11,17 +14,19 @@ class RainSerializer(serializers.ModelSerializer):
 
 
 class FieldSerializer(serializers.ModelSerializer):
-    """Field Serializer"""
-
+    """
+    Field Serializer
+    """
     accumulated_rain = serializers.DecimalField(
         max_digits=10,
         decimal_places=3,
-        required=False
+        required=False,
+        min_value=0
     )
     average_rain = serializers.DecimalField(
         max_digits=10,
         decimal_places=3,
-        required=False
+        required=False,
     )
 
     class Meta:
@@ -35,11 +40,25 @@ class FieldSerializer(serializers.ModelSerializer):
             'average_rain'
         ]
 
-class QueryParamsSerializer(serializers.Serializer):
-    """"""
-    average_rain = serializers.IntegerField(required=False)
+class FieldViewSetParamsSerializer(serializers.Serializer):
+    """
+    Serializer for FieldViewSet view parameters
+    """
+    average_rain = serializers.IntegerField(
+        required=False,
+        min_value=0,
+        max_value=7
+    )
     accumulated_rain = serializers.DecimalField(
         max_digits=10,
         decimal_places=3,
-        required=False
+        required=False,
+        min_value=0
     )
+
+
+class RainViewSetParamsSerializer(serializers.Serializer):
+    """
+    Serializer for RainViewSet view parameters
+    """
+    field = serializers.CharField(max_length=30)
