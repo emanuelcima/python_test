@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets, mixins
 
 from api.models import Field, Rain
-from api.serializers import RainSerializer, FieldSerializer
+from api.serializers import RainSerializer, FieldSerializer, QueryParamsSerializer
 
 
 class RainViewSet(mixins.CreateModelMixin,
@@ -32,13 +32,16 @@ class FieldViewSet(mixins.ListModelMixin,
     Returns a list of the fields
     """
     serializer_class = FieldSerializer
+    query_params_serializer = QueryParamsSerializer
 
     def get_queryset(self):
-        if (acum := self.request.query_params.get('accumulated_rain', None)):
+        query_params = self.query_params_serializer(data=self.request.query_params)
+        query_params.is_valid(raise_exception=True)
+        if (acum := query_params.data.get('accumulated_rain', None)):
             return self.get_fields_with_accum_rain_greater_than(acum)
 
-        if (days := self.request.query_params.get('average_rain', None)):
-            return self.get_average_rain(int(days))
+        if (days := query_params.data.get('average_rain', None)):
+            return self.get_average_rain(days)
 
         return Field.objects.none()
 

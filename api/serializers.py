@@ -18,7 +18,6 @@ class FieldSerializer(serializers.ModelSerializer):
         decimal_places=3,
         required=False
     )
-
     average_rain = serializers.DecimalField(
         max_digits=10,
         decimal_places=3,
@@ -35,3 +34,12 @@ class FieldSerializer(serializers.ModelSerializer):
             'accumulated_rain',
             'average_rain'
         ]
+
+class QueryParamsSerializer(serializers.Serializer):
+    """"""
+    average_rain = serializers.IntegerField(required=False)
+    accumulated_rain = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=3,
+        required=False
+    )
