@@ -60,5 +60,5 @@ class FieldViewSet(mixins.ListModelMixin,
     def get_average_rain(self, days):
         today = date.today()
         date_filter = Q(rain__date__gt=today-timedelta(days))
-        average = Sum('rain__millimeters', filter=date_filter)/days
+        average = Sum('rain__millimeters', filter=date_filter)/(days*1.0)
         return Field.objects.annotate(average_rain=Coalesce(average, 0))
