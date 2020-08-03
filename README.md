@@ -8,7 +8,7 @@ git clone https://github.com/emanuelcima/python_test.git
 
 python3 -m venv env
 source env/bin/activate
-pip install -r requirements.txt
+pip install -r ./python_test/requirements.txt
 
 cd python_test
 python manage.py runserver
