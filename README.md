@@ -15,7 +15,9 @@ python manage.py runserver
 ```
 
 ## Modelo
-![Modelo](./docs/api/model.svg)
+<p align="center">
+  <img src="./docs/api/model.svg">
+</p>
 
 ## Api
 | URL                             | Método HTTP | Acción | Descripción
